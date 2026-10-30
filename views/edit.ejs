@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Your Chat</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <main class="form-container">
+        <div class="form-card edit-card">
+
+            <a href="/chats" class="back-link">← Back to chats</a>
+
+            <p class="eyebrow">MESSAGE SETTINGS</p>
+            <h1>Edit your chat</h1>
+            <p class="form-subtitle">
+                Make changes to your message below.
+            </p>
+
+            <div class="chat-details">
+                <p>
+                    <span>Chat ID</span>
+                    <strong><%= chat._id %></strong>
+                </p>
+                <p>
+                    <span>From</span>
+                    <strong><%= chat.from %></strong>
+                </p>
+                <p>
+                    <span>To</span>
+                    <strong><%= chat.to %></strong>
+                </p>
+            </div>
+
+            <form action="/chats/<%= chat._id%>?_method=PUT" method="post" class="chat-form">
+                <label for="msg">Your message</label>
+
+                <textarea
+                    id="msg"
+                    name="msg"
+                    rows="5"
+                    required
+                ><%= chat.msg %></textarea>
+
+                <button type="submit">Save Changes →</button>
+            </form>
+
+        </div>
+    </main>
+</body>
+</html>

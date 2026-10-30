@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Chats</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">MESSAGES</p>
+                <h1>All Chats</h1>
+                <p class="subtitle">Your conversations, all in one place.</p>
+            </div>
+            <span class="chat-icon">✉</span>
+        </header>
+        <DIV class="btn">
+            <form action="/chats/new" method="get">
+                <button type="submit">+ New Chat</button>
+
+
+        </DIV>
+        </form>
+        <section class="chat-list">
+            <% for (let chat of chats) { %>
+                <article class="chat-card">
+                    <div class="chat-top">
+                        <div class="avatar">
+                            <%= chat.from.charAt(0).toUpperCase() %>
+                        </div>
+                        <div class="user-info">
+                            <p class="sender">
+                                <%= chat.from %>
+                            </p>
+                            <p class="receiver">
+                                To <%= chat.to %>
+                            </p>
+                        </div>
+                        <span class="status">Message</span>
+                    </div>
+
+                    <div class="msg">
+                        <p>
+                            <%= chat.msg %>
+                        </p>
+                        <form action="/chats/<%=chat._id%>/edit" method="get">
+                            <button type="submit" class="edit-btn">
+                                <span>✎</span> Edit</button>
+                        </form>
+                        <form 
+                        onsubmit="return confirm('Are you sure you want to delete this chat?')" 
+                        action="/chats/<%=chat._id%>?_method=DELETE" method="POST">
+                            <button type="submit" class=" edit-btn delete-btn" title="Delete chat">
+                                <span>🗑️</span> Delete </button>
+                        </form>
+                    </div>
+                    <br>
+
+
+
+                    <div class=" date">
+                        <p>Created: <%= chat.created_at.toLocaleString("en-IN") %>
+                        </p>
+         
+                        <% if (chat.updated_at) { %>
+                            <p>Updated: <%= chat.updated_at.toLocaleString("en-IN") %>
+                            </p>
+                            <% } %>
+                    </div>
+                </article>
+                <% } %>
+        </section>
+    </main>
+</body>
+
+</html>
